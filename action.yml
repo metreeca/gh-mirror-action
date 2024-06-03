@@ -1,0 +1,21 @@
+name: Mirror Branch
+description: Mirror the triggering branch to a target branch
+
+branding:
+  icon: git-branch
+  color: blue
+
+inputs:
+
+  token:
+    description: GitHub API access token
+    required: false
+    default: ${{ github.token }}
+
+  branch:
+    description: Name of the mirroring branch
+    required: true
+
+runs:
+  using: node20
+  main: index.js
