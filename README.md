@@ -29,8 +29,9 @@ jobs:
 
 # Support
 
-- open an [issue](ssues) to report a problem or to suggest a new feature
-- start a [discussion](discussions) to ask a how-to question or to share an idea
+- open an [issue](https://github.com/metreeca/gh-mirror-action/issues) to report a problem or to suggest a new feature
+- start a [discussion](https://github.com/metreeca/gh-mirror-action/discussions) to ask a how-to question or to share an
+  idea
 
 # License
 
