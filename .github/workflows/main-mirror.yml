@@ -1,0 +1,13 @@
+name: main-mirror
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          branch: main
