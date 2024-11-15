@@ -12,9 +12,10 @@ inputs:
     required: false
     default: ${{ github.token }}
 
-  branch:
-    description: Name of the mirroring branch
-    required: true
+  target:
+    description: Name of the target branch
+    required: false
+    default: "main"
 
 runs:
   using: node20

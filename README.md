@@ -4,10 +4,10 @@ This action mirrors the triggering branch to a target branch.
 
 ## Inputs
 
-| name     | default               | description                  |
-|----------|-----------------------|------------------------------|
-| `token`  | `${{ github.token }}` | GitHub API access token      |
-| `branch` | *required*            | name of the mirroring branch |
+| name     | default               | description               |
+|----------|-----------------------|---------------------------|
+| `token`  | `${{ github.token }}` | GitHub API access token   |
+| `target` | main                  | name of the target branch |
 
 ## Example
 
@@ -25,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: metreeca/gh-mirror-action@v1
+        with:
+          token: ${{ github.token }} # optional
+          target: main               #optional
 ```
 
 # Support

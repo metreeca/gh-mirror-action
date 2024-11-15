@@ -18,24 +18,29 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 const token=core.getInput("token", { required: true });
-const branch=core.getInput("branch", { required: true });
+const target=core.getInput("target", { required: true });
 
 const octokit=github.getOctokit(token);
 
 const { repo: { owner, repo }, sha }=github.context;
+
+
+const ref=`heads/${target}`;
+
+core.notice(`mirroring current branch to ref <${ref}>`);
 
 octokit.git.updateRef({
 
 	owner,
 	repo,
 
-	ref: `heads/${branch}`,
+	ref,
 	sha,
 
 	force: true
 
 }).catch((error: unknown) => {
 
-	core.setFailed(`failed to update ref: ${error}`);
+	core.setFailed(`failed to update ref <${ref}>: ${error}`);
 
 });
