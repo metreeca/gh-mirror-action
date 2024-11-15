@@ -24,10 +24,10 @@ jobs:
   mirror-to-main:
     runs-on: ubuntu-latest
     steps:
-      - uses: metreeca/gh-mirror-action@v1
+      - uses: metreeca/gh-mirror-action@v2
         with:
           token: ${{ github.token }} # optional
-          target: main               #optional
+          target: main               # optional
 ```
 
 # Support

@@ -13,34 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import * as core from "@actions/core";
 import * as github from "@actions/github";
-
-const token=core.getInput("token", { required: true });
-const target=core.getInput("target", { required: true });
-
-const octokit=github.getOctokit(token);
-
-const { repo: { owner, repo }, sha }=github.context;
-
-
-const ref=`heads/${target}`;
-
+const token = core.getInput("token", { required: true });
+const target = core.getInput("target", { required: true });
+const octokit = github.getOctokit(token);
+const { repo: { owner, repo }, sha } = github.context;
+const ref = `heads/${target}`;
 core.notice(`mirroring current branch to ref <${ref}>`);
-
 octokit.rest.git.updateRef({
-
-	owner,
-	repo,
-
-	ref,
-	sha,
-
-	force: true
-
-}).catch((error: unknown) => {
-
-	core.setFailed(`failed to update ref <${ref}>: ${error}`);
-
+    owner,
+    repo,
+    ref,
+    sha,
+    force: true
+}).catch((error) => {
+    core.setFailed(`failed to update ref <${ref}>: ${error}`);
 });
