@@ -31721,15 +31721,15 @@ const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("token", { req
 const target = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("target", { required: true });
 const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
 const { repo: { owner, repo }, sha } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
-const ref = `heads/${target}`;
-_actions_core__WEBPACK_IMPORTED_MODULE_0__.notice(`mirroring current branch to ref <${ref}>`);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+_actions_core__WEBPACK_IMPORTED_MODULE_0__.notice(`mirroring <${_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref}> to ref <${target}>`);
 octokit.rest.git.updateRef({
     owner,
     repo,
-    ref,
+    ref: `heads/${target}`,
     sha,
     force: true
 }).catch((error) => {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`failed to update ref <${ref}>: ${error}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`failed to update ref <${target}>: ${error}`);
 });
 

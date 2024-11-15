@@ -24,23 +24,22 @@ const octokit=github.getOctokit(token);
 
 const { repo: { owner, repo }, sha }=github.context;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ref=`heads/${target}`;
-
-core.notice(`mirroring current branch to ref <${ref}>`);
+core.notice(`mirroring <${github.context.ref}> to ref <${target}>`);
 
 octokit.rest.git.updateRef({
 
 	owner,
 	repo,
 
-	ref,
+	ref: `heads/${target}`,
 	sha,
 
 	force: true
 
 }).catch((error: unknown) => {
 
-	core.setFailed(`failed to update ref <${ref}>: ${error}`);
+	core.setFailed(`failed to update ref <${target}>: ${error}`);
 
 });
