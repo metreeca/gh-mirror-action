@@ -36,7 +36,7 @@ octokit.rest.git.updateRef({
 	ref: `heads/${target}`,
 	sha,
 
-	force: true
+	force: target !== "main"
 
 }).catch((error: unknown) => {
 

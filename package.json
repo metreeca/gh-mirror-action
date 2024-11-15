@@ -3,7 +3,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "clean": "rm -rf node_modules dist",
+    "clean": "rm -rf node_modules",
     "setup": "npm install",
     "build": "ncc build index.ts"
   },

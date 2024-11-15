@@ -31728,7 +31728,7 @@ octokit.rest.git.updateRef({
     repo,
     ref: `heads/${target}`,
     sha,
-    force: true
+    force: target !== "main"
 }).catch((error) => {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`failed to update ref <${target}>: ${error}`);
 });
