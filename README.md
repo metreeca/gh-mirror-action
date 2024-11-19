@@ -1,20 +1,24 @@
-This action mirrors the triggering branch to a target branch.
+# Metreeca/Sync
+
+This action merges the triggering branch into a target branch.
 
 # Usage
 
 ## Inputs
 
-| name     | default               | description               |
-|----------|-----------------------|---------------------------|
-| `token`  | `${{ github.token }}` | GitHub API access token   |
-| `target` | main                  | name of the target branch |
+| name      | default                        | description                                                                                                      |
+|-----------|--------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `token`   | `${{ github.token }}`          | GitHub API access token                                                                                          |
+| `source`  | `${{ github.ref }}`            | name of the source branch; defaults to the fully-formed ref of the branch or tag that triggered the workflow run |
+| `target`  | `main`                         | name of the target branch                                                                                        |
+| `message` | `Merge {source} into {target}` | commit message template                                                                                          |
 
 ## Example
 
-Mirror the `release/v1.0` branch to the `main` branch:
+Merge the `release/v1.0` branch into the `main` branch:
 
 ```yaml
-name: Mirror branch
+name: Merge branch
 
 on:
   push:
@@ -24,10 +28,12 @@ jobs:
   mirror-to-main:
     runs-on: ubuntu-latest
     steps:
-      - uses: metreeca/gh-mirror-action@v2
+      - uses: metreeca/gh-sync-action@v2
         with:
-          token: ${{ github.token }} # optional
-          target: main               # optional
+          token: ${{ github.token }}            # optional
+          source: ${{ github.ref }}             # optional
+          target: main                          # optional
+          message: Merge {source} into {target} # optional
 ```
 
 # Support

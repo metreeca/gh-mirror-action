@@ -1,4 +1,4 @@
-name: main-publish
+name: main-sync
 
 on:
 
@@ -17,5 +17,5 @@ jobs:
       - name: Check out tagged version
         uses: actions/checkout@v4
 
-      - name: Mirror to main
+      - name: Sync to main
         uses: ./

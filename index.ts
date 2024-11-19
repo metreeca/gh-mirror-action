@@ -18,28 +18,32 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 
 const token=core.getInput("token", { required: true });
+const source=core.getInput("source", { required: true });
 const target=core.getInput("target", { required: true });
+const message=core.getInput("message", { required: true });
 
 const octokit=github.getOctokit(token);
 
-const { repo: { owner, repo }, sha }=github.context;
+const { repo: { owner, repo } }=github.context;
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-core.notice(`mirroring <${github.context.ref}> to ref <${target}>`);
-
-octokit.rest.git.updateRef({
+octokit.rest.repos.merge({
 
 	owner,
 	repo,
 
-	ref: `heads/${target}`,
-	sha,
+	base: target,
+	head: source,
 
-	force: target !== "main"
+	commit_message: message
+		.replace("{source}", source)
+		.replace("{target}", target)
 
 }).catch((error: unknown) => {
 
-	core.setFailed(`failed to update ref <${target}>: ${error}`);
+	core.setFailed(`failed to merge <${source}> into <${target}>: ${error}`);
 
 });
+

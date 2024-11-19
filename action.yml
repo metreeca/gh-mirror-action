@@ -12,10 +12,20 @@ inputs:
     required: false
     default: ${{ github.token }}
 
+  source:
+    description: Name of the source branch
+    required: false
+    default: ${{ github.ref }}
+
   target:
     description: Name of the target branch
     required: false
     default: "main"
+
+  message:
+    description: Commit message template
+    required: false
+    default: "Merge {source} into {target}"
 
 runs:
   using: node20

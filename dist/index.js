@@ -31718,18 +31718,21 @@ var __webpack_exports__ = {};
 
 
 const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("token", { required: true });
+const source = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("source", { required: true });
 const target = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("target", { required: true });
+const message = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("message", { required: true });
 const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit(token);
-const { repo: { owner, repo }, sha } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
+const { repo: { owner, repo } } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-_actions_core__WEBPACK_IMPORTED_MODULE_0__.notice(`mirroring <${_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.ref}> to ref <${target}>`);
-octokit.rest.git.updateRef({
+octokit.rest.repos.merge({
     owner,
     repo,
-    ref: `heads/${target}`,
-    sha,
-    force: target !== "main"
+    base: target,
+    head: source,
+    commit_message: message
+        .replace("{source}", source)
+        .replace("{target}", target)
 }).catch((error) => {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`failed to update ref <${target}>: ${error}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`failed to merge <${source}> into <${target}>: ${error}`);
 });
 
