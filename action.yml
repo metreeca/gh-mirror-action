@@ -12,10 +12,21 @@ inputs:
     required: false
     default: ${{ github.token }}
 
-  branch:
-    description: Name of the mirroring branch
-    required: true
+  source:
+    description: Name of the source branch
+    required: false
+    default: ${{ github.ref }}
+
+  target:
+    description: Name of the target branch
+    required: false
+    default: "main"
+
+  message:
+    description: Commit message template
+    required: false
+    default: "Merge {source} into {target}"
 
 runs:
   using: node20
-  main: index.js
+  main: dist/index.js

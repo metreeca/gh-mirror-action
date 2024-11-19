@@ -1,0 +1,21 @@
+name: main-sync
+
+on:
+
+  push:
+    tags:
+      - v*
+
+jobs:
+
+  mirror:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out tagged version
+        uses: actions/checkout@v4
+
+      - name: Sync to main
+        uses: ./
